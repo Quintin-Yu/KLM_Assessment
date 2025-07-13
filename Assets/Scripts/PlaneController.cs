@@ -10,10 +10,15 @@ public class PlaneController : MonoBehaviour
 
 	[Header("Lights")]
 	public List<Light> NavLights = new List<Light>();
+	public List<Light> RunwayLight = new List<Light>();
 
+	[SerializeField]
+	private Plane_State _state;
 
 	private void OnEnable()
 	{
+		_state = Plane_State.Grounded;
+
 		Debug.Log($"{gameObject.name} activated");
 		takeoffCommand?.RegisterListener(TakeOff);
 		landCommand?.RegisterListener(Landing);
@@ -34,13 +39,51 @@ public class PlaneController : MonoBehaviour
 	void LightsOn()
 	{
 		Debug.Log($"{gameObject.name}: Lights On");
-		UpdateLights(NavLights, true);
+		UpdateLightsBasedOnStatus();
 	}
 
 	void LightsOff()
 	{
 		Debug.Log($"{gameObject.name}: Lights Off");
-		UpdateLights(NavLights, false);
+		UpdateLightsBasedOnStatus(true);
+	}
+
+	void UpdateLightsBasedOnStatus(bool offsignal = false)
+	{
+		switch (_state)
+		{
+			case Plane_State.Grounded:
+				if (offsignal)
+				{
+					UpdateLights(RunwayLight, false);
+					break;
+				}
+
+				UpdateLights(NavLights, false);
+				UpdateLights(RunwayLight, true); 
+				break;
+			case Plane_State.InFlight:
+				if (offsignal)
+				{
+					UpdateLights(NavLights, false);
+					break;
+				}
+
+				UpdateLights(RunwayLight, false);
+				UpdateLights(NavLights, true);
+				break;
+			case Plane_State.Landing:
+				if (offsignal)
+				{
+					UpdateLights(NavLights, false);
+					UpdateLights(RunwayLight, false);
+					break;
+				}
+
+				UpdateLights(NavLights, true);
+				UpdateLights(RunwayLight, true);
+				break;
+		}
 	}
 
 	void UpdateLights(List<Light> lights, bool lightStatus)
