@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 911ddf4d2a0cd4c469fed203e44066b0, type: 3}
   m_Name: LandPlanes
   m_EditorClassIdentifier: 
-  command: 
-  output: 
+  command: land
+  output: Planes are starting to land

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: LightsOn
   m_EditorClassIdentifier: 
   command: lightson
-  output: 
+  output: Turning lights on for planes
