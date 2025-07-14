@@ -1488,7 +1488,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thrust: 650
   lift: 65
-  takeOffSpeed: 5
+  takeOffSpeed: 2.5
   forwardReference: {fileID: 1822521991}
 --- !u!114 &1178477888
 MonoBehaviour:
@@ -1524,7 +1524,7 @@ Rigidbody:
   m_GameObject: {fileID: 1178477885}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 0
+  m_Drag: 0.2
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: -0.25, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -3040,19 +3040,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2099878926433611923, guid: ac65306b9bc0a8d49920f221b194754a, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7069765
+      value: 0.70710677
       objectReference: {fileID: 0}
     - target: {fileID: 2099878926433611923, guid: ac65306b9bc0a8d49920f221b194754a, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.7069765
+      value: -0.70710677
       objectReference: {fileID: 0}
     - target: {fileID: 2099878926433611923, guid: ac65306b9bc0a8d49920f221b194754a, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.013574572
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2099878926433611923, guid: ac65306b9bc0a8d49920f221b194754a, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.013574572
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2099878926433611923, guid: ac65306b9bc0a8d49920f221b194754a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3060,7 +3060,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2099878926433611923, guid: ac65306b9bc0a8d49920f221b194754a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 87.8
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 2099878926433611923, guid: ac65306b9bc0a8d49920f221b194754a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -3106,6 +3106,14 @@ PrefabInstance:
       propertyPath: m_CenterOfMass.y
       value: -1
       objectReference: {fileID: 0}
+    - target: {fileID: 8373192009165230812, guid: ac65306b9bc0a8d49920f221b194754a, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 782b69f008aa00849894d150f281eaed, type: 2}
+    - target: {fileID: 9079616014246404194, guid: ac65306b9bc0a8d49920f221b194754a, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 782b69f008aa00849894d150f281eaed, type: 2}
     m_RemovedComponents:
     - {fileID: 6315851877758548359, guid: ac65306b9bc0a8d49920f221b194754a, type: 3}
     - {fileID: 8325864393101614472, guid: ac65306b9bc0a8d49920f221b194754a, type: 3}
