@@ -15,6 +15,8 @@ public class FlightController : MonoBehaviour
     private bool isTakingOff = false;
     private bool hasTakenOff = false;
 
+    [Header("Lift")]
+    private float maxUpwardTrust = 10f;
 
    void Awake()
     {
@@ -33,23 +35,63 @@ public class FlightController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!isTakingOff) return;
+        if (!isTakingOff && !hasTakenOff)
+        {
+            Debug.Log("dead");
+            return;
+        }
+        Debug.Log("Alive");
 
-        rb.AddForce(forwardReference.forward * thrust * Time.deltaTime, ForceMode.Acceleration);
+        ApplyForwardMomentum();
+		
+		float forwardSpeed = Vector3.Dot(rb.linearVelocity, forwardReference.forward);
 
-        float forwardSpeed = Vector3.Dot(rb.linearVelocity, forwardReference.forward);
+        ApplyUpwardMomentum(forwardSpeed);
 
-        if (!hasTakenOff && forwardSpeed >= takeOffSpeed) ApplyLift();
+		Debug.DrawLine(transform.position, transform.position + forwardReference.forward * 10, Color.blue);
+		Debug.DrawLine(transform.position, transform.position + transform.up * 10, Color.blue);
+	}
 
-        Debug.DrawLine(transform.position, transform.position + forwardReference.forward * 10, Color.blue);
-    }
-
-    private void ApplyLift()
+    private void ApplyForwardMomentum()
     {
-        isTakingOff = false;
-        hasTakenOff = true;
+		Vector3 force = forwardReference.forward * thrust * Time.deltaTime;
+		float clampedMagnitude = Mathf.Clamp(force.magnitude, -15f, 15f);
+		force = force.normalized * clampedMagnitude;
 
-        rb.AddForce(Vector3.up * lift * Time.deltaTime, ForceMode.Force);
+		rb.AddForce(force, ForceMode.Acceleration);
+	}
+
+	private void ApplyUpwardMomentum(float forwardMomentum)
+	{
+        if (!hasTakenOff && forwardMomentum >= takeOffSpeed) ApplyLift();
+
+		if (hasTakenOff)
+		{
+			float liftAmount = lift * forwardMomentum * Time.deltaTime;
+
+            liftAmount = Mathf.Clamp(liftAmount, 0f, maxUpwardTrust);
+
+			Debug.Log($"Continuous Lift: {liftAmount}");
+			rb.AddForce(transform.up * liftAmount, ForceMode.Acceleration);
+		}
+
+        float maxHeight = 7f;
+
+        if (transform.position.y >= maxHeight)
+        {
+            transform.position = new Vector3(transform.position.x , maxHeight, transform.position.z);
+        }
+	}
+
+	private void ApplyLift()
+    {
+		hasTakenOff = true;
+		isTakingOff = false;
+
+        Vector3 liftForce = Vector3.up * lift * Time.deltaTime;
+        Debug.Log(liftForce);
+
+        rb.AddForce(Vector3.up * lift * Time.deltaTime, ForceMode.Impulse);
         rb.constraints = RigidbodyConstraints.None;
 
         planeState?.Invoke(Plane_State.InFlight);
