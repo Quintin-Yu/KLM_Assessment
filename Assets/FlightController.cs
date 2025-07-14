@@ -16,7 +16,7 @@ public class FlightController : MonoBehaviour
     private bool hasTakenOff = false;
 
     [Header("Lift")]
-    private float maxUpwardTrust = 10f;
+    private float maxUpwardTrust = 15f;
 
    void Awake()
     {
@@ -47,7 +47,7 @@ public class FlightController : MonoBehaviour
 		float forwardSpeed = Vector3.Dot(rb.linearVelocity, forwardReference.forward);
 
         ApplyUpwardMomentum(forwardSpeed);
-
+        
 		Debug.DrawLine(transform.position, transform.position + forwardReference.forward * 10, Color.blue);
 		Debug.DrawLine(transform.position, transform.position + transform.up * 10, Color.blue);
 	}
@@ -70,12 +70,17 @@ public class FlightController : MonoBehaviour
 			float liftAmount = lift * forwardMomentum * Time.deltaTime;
 
             liftAmount = Mathf.Clamp(liftAmount, 0f, maxUpwardTrust);
-
-			Debug.Log($"Continuous Lift: {liftAmount}");
+			
+            rb.linearDamping = 1f;
+			
 			rb.AddForce(transform.up * liftAmount, ForceMode.Acceleration);
 		}
+        else
+        {
+            rb.linearDamping = 0.2f;
+        }
 
-        float maxHeight = 7f;
+        float maxHeight = 4f;
 
         if (transform.position.y >= maxHeight)
         {
@@ -88,11 +93,11 @@ public class FlightController : MonoBehaviour
 		hasTakenOff = true;
 		isTakingOff = false;
 
-        Vector3 liftForce = Vector3.up * lift * Time.deltaTime;
+		Vector3 liftForce = Vector3.up * lift * Time.deltaTime;
         Debug.Log(liftForce);
 
-        rb.AddForce(Vector3.up * lift * Time.deltaTime, ForceMode.Impulse);
-        rb.constraints = RigidbodyConstraints.None;
+        rb.AddForce(Vector3.up * lift * Time.deltaTime, ForceMode.Acceleration);
+        //rb.constraints = RigidbodyConstraints.None;
 
         planeState?.Invoke(Plane_State.InFlight);
     }
