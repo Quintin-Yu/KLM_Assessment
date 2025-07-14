@@ -363,6 +363,37 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!1 &1119685603958536908
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6020501905452455108}
+  m_Layer: 0
+  m_Name: Forward
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6020501905452455108
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1119685603958536908}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0.00398, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2099878926433611923}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!1 &1616673993896962601
 GameObject:
   m_ObjectHideFlags: 0
@@ -377,6 +408,7 @@ GameObject:
   - component: {fileID: 585509977057488630}
   - component: {fileID: 8369638095118102230}
   - component: {fileID: 6315851877758548359}
+  - component: {fileID: 8325864393101614472}
   m_Layer: 0
   m_Name: Boeing 737-700
   m_TagString: Untagged
@@ -401,6 +433,7 @@ Transform:
   - {fileID: 704278691210255072}
   - {fileID: 5170331850953749785}
   - {fileID: 6428689791266145773}
+  - {fileID: 6020501905452455108}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -90, y: 87.8, z: -90}
 --- !u!33 &3065719168698974006
@@ -528,6 +561,23 @@ MonoBehaviour:
   - {fileID: 3795172547647485122}
   - {fileID: 276430313298877253}
   _state: 0
+  _flightController: {fileID: 0}
+--- !u!114 &8325864393101614472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1616673993896962601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a31b7e2aca81e6f438efd15a769967da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thrust: 200
+  lift: 25
+  takeOffSpeed: 30
+  forwardReference: {fileID: 0}
 --- !u!1 &1821608762751226799
 GameObject:
   m_ObjectHideFlags: 0

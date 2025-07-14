@@ -13,9 +13,18 @@ public class PlaneController : MonoBehaviour
 	public List<Light> NavLights = new List<Light>();
 	public List<Light> RunwayLight = new List<Light>();
 
-	[SerializeField]
-	private Plane_State _state;
+	[SerializeField] private Plane_State _state;
+	[SerializeField] private FlightController _flightController;
+
 	private Coroutine _coroutine;
+
+	private void Awake()
+	{
+		if (_flightController == null)
+			_flightController = GetComponent<FlightController>();
+
+		_flightController.planeState += PlaneStateChange;
+	}
 
 	private void OnEnable()
 	{
@@ -32,6 +41,7 @@ public class PlaneController : MonoBehaviour
 	void TakeOff()
 	{
 		Debug.Log($"{gameObject.name}: Taking Off");
+		_flightController.StartTakeOff();
 		_state = Plane_State.TakingOff;
 		UpdateLightsBasedOnStatus();
 	}
@@ -117,6 +127,12 @@ public class PlaneController : MonoBehaviour
 		{
 			light.enabled = lightStatus;
 		}
+	}
+
+	private void PlaneStateChange(Plane_State state)
+	{
+		_state = state;
+		UpdateLightsBasedOnStatus();
 	}
 
 	private IEnumerator LandingSequence(float waitTime)
