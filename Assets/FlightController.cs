@@ -48,9 +48,6 @@ public class FlightController : MonoBehaviour
 		float forwardSpeed = Vector3.Dot(rb.linearVelocity, forwardReference.forward);
 
         ApplyUpwardMomentum(forwardSpeed);
-        
-		Debug.DrawLine(transform.position, transform.position + forwardReference.forward * 10, Color.blue);
-		Debug.DrawLine(transform.position, transform.position + transform.up * 10, Color.blue);
 	}
 
     private void ApplyForwardMomentum()
@@ -96,7 +93,7 @@ public class FlightController : MonoBehaviour
         Debug.Log(liftForce);
 
         rb.AddForce(Vector3.up * lift * Time.deltaTime, ForceMode.Acceleration);
-        //rb.constraints = RigidbodyConstraints.None;
+        rb.constraints = RigidbodyConstraints.None;
 
         planeState?.Invoke(Plane_State.InFlight);
     }

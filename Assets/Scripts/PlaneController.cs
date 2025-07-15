@@ -8,6 +8,7 @@ public class PlaneController : MonoBehaviour
 	public SOCommand landCommand;
 	public SOCommand lightOnCommand;
 	public SOCommand lightoffCommand;
+	public SOCommand parkCommand;
 
 	[Header("Lights")]
 	public List<Light> NavLights = new List<Light>();
@@ -35,6 +36,7 @@ public class PlaneController : MonoBehaviour
 		landCommand?.RegisterListener(Landing);
 		lightOnCommand?.RegisterListener(LightsOn);
 		lightoffCommand?.RegisterListener(LightsOff);
+		parkCommand?.RegisterListener(Park);
 	}
 
 	#region Events_Region
@@ -53,6 +55,13 @@ public class PlaneController : MonoBehaviour
 		UpdateLightsBasedOnStatus();
 	}
 
+	void Park()
+	{
+		Debug.Log($"{gameObject.name}: Parking");
+		_state = Plane_State.Grounded;
+		UpdateLightsBasedOnStatus();
+	}
+
 	void LightsOn()
 	{
 		Debug.Log($"{gameObject.name}: Lights On");
@@ -64,14 +73,15 @@ public class PlaneController : MonoBehaviour
 		Debug.Log($"{gameObject.name}: Lights Off");
 		UpdateLightsBasedOnStatus(true);
 	}
+
 	#endregion
 
-	void UpdateLightsBasedOnStatus(bool offsignal = false)
+	void UpdateLightsBasedOnStatus(bool shouldTurnOff = false)
 	{
 		switch (_state)
 		{
 			case Plane_State.Grounded:
-				if (offsignal)
+				if (shouldTurnOff)
 				{
 					UpdateLights(RunwayLight, false);
 					break;
@@ -81,7 +91,7 @@ public class PlaneController : MonoBehaviour
 				UpdateLights(RunwayLight, true); 
 				break;
 			case Plane_State.InFlight:
-				if (offsignal)
+				if (shouldTurnOff)
 				{
 					UpdateLights(NavLights, false);
 					break;
@@ -91,7 +101,7 @@ public class PlaneController : MonoBehaviour
 				UpdateLights(NavLights, true);
 				break;
 			case Plane_State.Landing:
-				if (offsignal)
+				if (shouldTurnOff)
 				{
 					UpdateLights(NavLights, false);
 					UpdateLights(RunwayLight, false);
@@ -105,7 +115,7 @@ public class PlaneController : MonoBehaviour
 				_coroutine = StartCoroutine(LandingSequence(5));
 				break;
 			case Plane_State.TakingOff:
-				if (offsignal)
+				if (shouldTurnOff)
 				{
 					UpdateLights(NavLights, false);
 					UpdateLights(RunwayLight, false);

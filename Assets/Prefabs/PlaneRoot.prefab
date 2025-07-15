@@ -441,7 +441,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0.2
   m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: -0.25, z: 0}
+  m_CenterOfMass: {x: 0, y: -0.5, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
   m_IncludeLayers:
@@ -473,6 +473,7 @@ MonoBehaviour:
   landCommand: {fileID: 11400000, guid: 4400b9133657b5c4aa32dac752121a1a, type: 2}
   lightOnCommand: {fileID: 11400000, guid: ca8f7364bcc925d449bfe8a383842982, type: 2}
   lightoffCommand: {fileID: 11400000, guid: c51535d04b3f2d5448ed06788e6b9e86, type: 2}
+  parkCommand: {fileID: 0}
   NavLights:
   - {fileID: 8712013409138973088}
   - {fileID: 1339956734243207356}
