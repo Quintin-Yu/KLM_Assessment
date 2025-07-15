@@ -128,6 +128,10 @@ public class PlaneController : MonoBehaviour
 				if (_coroutine != null) StopCoroutine(_coroutine);
 				_coroutine = StartCoroutine(TakeOffSequence(5));
 				break;
+			case Plane_State.Parked:
+				UpdateLights(NavLights, false);
+				UpdateLights(RunwayLight, false);
+				break;
 		}
 	}
 
