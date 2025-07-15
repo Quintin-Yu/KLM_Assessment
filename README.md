@@ -2,6 +2,10 @@
 
 In this assessment my Unity skills and knowledge are tested. For this assignment I have to use Unity Events, Scriptable Objects, Changes in Prefabs, a UI Canvas and TextMeshPro. During the creation of this project I have used AI (ChatGPT) to support me in the development to make my development cycle. Sadly I was still unable to complete all the tasks that were asked of me. For what I had planned, I will have an extra section down below.
 
+## Youtube Video
+As requested I have made a video for this project. This video is in done in Dutch. As I was unsure what I should show and talk about in the video I mainly showed the hierarchy view as well as the project and showed how the project currently works and runs. I quickly showed how I wanted to implement the requested requirements of landing and parking by manually adjusting values in the Inspector view.
+https://youtu.be/Bcrks3xpc44
+
 ## Events and Scriptable Objects
 I used Unity Events together with Scriptable Objects. By creating Unity Events through Scriptable Objects it was easy to add new commando's when they were necessary. This also allowed me to easily execute the events using a command sent through an imputfield as well buttons underneath said inputfield. 
 
