@@ -7,6 +7,7 @@ public class FlightController : MonoBehaviour
     public float thrust = 500f;
     public float lift = 25f;
     public float takeOffSpeed = 30f;
+	public float maxHeight = 7f;
 
 	public Action<Plane_State> planeState;
 
@@ -79,8 +80,6 @@ public class FlightController : MonoBehaviour
         {
             rb.linearDamping = 0.2f;
         }
-
-        float maxHeight = 4f;
 
         if (transform.position.y >= maxHeight)
         {
