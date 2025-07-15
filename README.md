@@ -37,3 +37,6 @@ The second approach would be by using NavAgents. It would keep the destination e
 
 ### Scriptables for Plane information and Hangars
 I wanted to have each planes information stored inside of Scriptable Objects. This way I could easily make new planes. I wanted to have the plane names and models connected through the scriptable objects. The plane names could than be coupled to the hangar. I would than have the correct plane name above the correct hangar. By editting the Scriptable Object, I would only have to change the name in one position, instead of having to change the name above the plane as well as above the Hangar.
+
+## Github
+Since I was working alone, I pushed everything to the main branch. The best practice would be to have a branch for each feature I am implementing. Though to save time I decided against doing this. I should also have committed more often to the repository in my own opinion. Something I only started doing later during the project.
